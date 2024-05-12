@@ -175,10 +175,13 @@ public class Hcl {
 	   map2.put("amit",16);
 	   map2.put("lokendra",1);
 	   
-	   Set<String> sets=map1.entrySet().stream().filter(entry->map2.containsKey(entry.getKey())).map(Map.Entry::getKey).collect(Collectors.toSet());
+	   // using entryset()
+	   Set<String> sets=map1.entrySet().stream()
+			   .filter(entry->map2.containsKey(entry.getKey())).
+			   map(Map.Entry::getKey).collect(Collectors.toSet());
 
 	    System.out.println("Stream api of entrySet" +sets);
-	   
+	   // using keySet();
 	    Set<String> commonKeys = map1.keySet().stream()
 	            .filter(map2::containsKey)
 	            .collect(Collectors.toSet());
@@ -186,8 +189,17 @@ public class Hcl {
 	   System.out.println("Stream api of keySet" +commonKeys);
 
 		
-	}		
+			
 	
+	//=========================================
+	//find the occunce of each number
+	int numbers = 11233433;
+	Map<Character,Long> mapp=String.valueOf(numbers).chars().mapToObj(c->(char)c).
+	collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+	
+	mapp.entrySet().stream().forEach(e->{System.out.println(e.getKey()+"  "+e.getValue());});
+	
+	}
 	
 	
 //	====================================================
